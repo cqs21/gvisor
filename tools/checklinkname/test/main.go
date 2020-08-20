@@ -1,4 +1,4 @@
-// Copyright 2018 The gVisor Authors.
+// Copyright 2021 The gVisor Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,24 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:build go1.12
-// +build go1.12
-
-// //go:linkname directives type-checked by checklinkname. Any other
-// non-linkname assumptions outside the Go 1 compatibility guarantee should
-// have an accompanied vet check or version guard build tag.
-
-package ptrace
+// Binary main calls linkname'd functions. It is used for testing analysis, and
+// should not be executed.
+package main
 
 import (
-	_ "unsafe" // required for go:linkname.
+	"gvisor.dev/gvisor/tools/checklinkname/test"
 )
 
-//go:linkname beforeFork syscall.runtime_BeforeFork
-func beforeFork()
-
-//go:linkname afterFork syscall.runtime_AfterFork
-func afterFork()
-
-//go:linkname afterForkInChild syscall.runtime_AfterForkInChild
-func afterForkInChild()
+func main() {
+	test.AttachedLinkname()
+	test.DetachedLinkname()
+}
