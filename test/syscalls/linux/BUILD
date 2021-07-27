@@ -4170,6 +4170,7 @@ cc_binary(
     srcs = ["msgqueue.cc"],
     linkstatic = 1,
     deps = [
+        "//test/util:capability_util",
         "//test/util:temp_path",
         "//test/util:test_main",
         "//test/util:test_util",
@@ -4187,6 +4188,7 @@ cc_binary(
         "//test/util:temp_path",
         "//test/util:test_main",
         "//test/util:test_util",
+        "@com_google_absl//absl/time",
     ],
 )
 
